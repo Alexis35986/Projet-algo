@@ -1,10 +1,16 @@
-with ada.Text_IO, ada.Integer_Text_IO, ada.Characters, Baby_sitter, Famille;
-use ada.Text_IO, ada.Integer_Text_IO, ada.Characters, Baby_sitter, Famille;
-procedure Projet_Ada_S6 is
-   choix : Character; teteB : T_listebaby; NewB : T_babysitter;
-     F : T_arbrefamille; newF : T_Famille;
-begin
-   loop
+WITH Ada.Text_IO, Ada.Integer_Text_IO, Ada.Characters, Baby_Sitter, famille, Gestion_Outils;
+USE Ada.Text_IO, Ada.Integer_Text_IO, Ada.Characters, Baby_Sitter, famille, Gestion_Outils;
+PROCEDURE Projet_Ada_S6 IS
+   Choix : Character;
+   TeteB : T_Listebaby;
+   NewB, B  : T_Babysitter;
+   F     : T_Arbrefamille;
+   NewF  : T_Famille;
+   NbF: Integer;
+   NomF, Dem : T_Mot;
+   K: integer;
+BEGIN
+   LOOP
       Put_Line ("1 : Afficher les listes de babysitter et de familles ");
       Put_Line ("2 : Ajout d'une nouvelle famille ");
       Put_Line ("3 : Visualisation du planning ");
@@ -16,14 +22,33 @@ begin
       Put_Line ("9 : Désinscription d'une famille ");
       Put_Line ("Q : Quitter ");
       Put ("Choissisez une option : ");
-      get (choix);Skip_Line;
-      case choix is
-         when '1' => VisuListeB(teteB); VisuFamille(F);
-         when '2' => SaisieFamille(newF); AjoutFamille(F, newF);
-         when '5' =>  ajoutBabysitter(teteB , NewB);
-         when 'Q'|'q' => exit;
-         when others => put ("Erreur de saisie ");New_Line;
-      end case;
-   end loop;
+      Get (Choix);
+      Skip_Line;
+      CASE Choix IS
+         WHEN '1' =>
+            VisuListeB(TeteB);
+            VisuFamille(F);
+         WHEN '2' =>
+            SaisieFamille(NewF);
+            AjoutFamille(F, NewF);
+         WHEN '3' =>
+            Afficher_Planning_Baby(F, NbF, TeteB);
+         WHEN '4' =>
+            Put("Nom de la famille qui demande la garde  "); Put("  "); Get_line(NomF, K);
+            Dem := Demande_Garde(F,NomF);
+            Put("La demande est elle possible?");
+            Put(Dem);
+            New_Line;
+            New_line;
 
-end Projet_Ada_S6;
+         WHEN '5' =>
+            AjoutBabysitter(TeteB , NewB);
+         WHEN 'Q'|'q' =>
+            EXIT;
+         WHEN OTHERS =>
+            Put ("Erreur de saisie ");
+            New_Line;
+      END CASE;
+   END LOOP;
+
+END Projet_Ada_S6;
