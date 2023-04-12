@@ -38,6 +38,4 @@ package body Baby_sitter is
       end if;
    end countBaby;
 
-
-
 end Baby_sitter;

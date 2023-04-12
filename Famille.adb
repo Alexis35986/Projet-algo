@@ -4,11 +4,18 @@ package body Famille is
    procedure VisuFamille (F : IN T_arbrefamille) is
    begin
       if F /= null then
-         put (F.Cle.Nom);
-         put (F.Cle.nbr_Enfant);
+         put ("Nom de la famille : ");
+         put (F.Cle.Nom);New_Line;
+         put ("Nombre d'enfants : ");
+         put (F.Cle.nbr_Enfant);New_Line;
+         put ("Age de tous les enfants : ");
          for i in F.Cle.age_Enfant'range loop
-            put (F.Cle.age_Enfant(i));
+            if F.Cle.age_Enfant(i) /= 0 then
+               put (F.Cle.age_Enfant(i));
+            else exit;
+            end if;
          end loop;
+         New_Line;
          VisuFamille(F.Fg);
          VisuFamille(F.Fd);
       end if;
